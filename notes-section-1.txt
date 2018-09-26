@@ -1,0 +1,67 @@
+Section 1: Intro to Jest, Enzyme, and TDD
+
+Uses create-react-app 1.5.2
+node 8.2.1
+npm 5.3.0
+react 16.3.2
+jest 22.4.3
+enzyme 3.3.0
+enzyme-adapter-react-16 1.1.1
+redux 4.0.0
+react-redux 5.0.7
+redux-thunk 2.2.0
+axios 0.18.0
+moxios 0.4.0
+
+
+it() and test() are same, but test() is in official Jest docs
+
+Enzyme creates a virtual DOM for testing, allows for testing w/o a browser
+Enzyme is more extensive than react-dom
+	Can use jQuery-like selectors to search through DOM
+	Can simulate events on the DOM
+	Shallow Rendering - render components one level deep, put placeholders for child components (allows cleaner and quicker testing)
+	Access to props and state (can manipulate, examine, test values)
+
+Added
+	ajv
+	enzyme-adapter: Tells it what type of code to expect (react-16)
+
+
+-------
+Types of tests
+
+Unit tests
+	Tests one piece (usually one function)
+Integration tests
+	How multiple units work together
+		e.g. the Lock works, but doesn't keep the door from actually opening.
+	Acceptance, or End-toEnd (E2E) tests
+		How a user would interact with the app
+			Selenium or Cyprus are tools that do Acceptance testing.
+
+Jest/Enzyme focus on Unit and Integration tests, not so much Acceptance testing
+
+
+-------
+Test behavior of the application, not the implementation.
+	Any code refactoring that doesn't affect the behavior doesn't break the tests.
+
+Example:
+	App keeps counter of button click count
+	Click count is stored in component state
+
+Good test:
+	Set initial state
+	Simulate clicking a button that increments counter
+	Check to see if counter state was incremented
+
+Brittle test:
+	Set initial state
+	Simulate clicking a button that increments counter
+	Check to see if particular function was called
+	NOTE: it's brittle because we're not checking state.
+	NOTE: we're testing implementation (function name), not behavior (state update)
+
+Sometimes skip unit, focus on integration. It's an art, not a science. Find your own style.
+
