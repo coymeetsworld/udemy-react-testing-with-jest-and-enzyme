@@ -4,6 +4,15 @@ import './App.css';
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      counter: 0
+    };
+  }
+
+
   render() {
 
     return (
@@ -16,7 +25,7 @@ class App extends Component {
         <h1 data-test="counter-display">The counter is currently</h1> 
         <button data-test="increment-button">Increment counter</button>
       </div>
-      
+
     );
   }
 }
