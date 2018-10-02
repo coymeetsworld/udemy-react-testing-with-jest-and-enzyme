@@ -54,6 +54,9 @@ test('renders counter display', () => {
 });
 
 test('counter starts at 0', () => {
+  const wrapper = setup();
+  const initialCounterState = wrapper.state('counter');
+  expect(initialCounterState).toBe(0);
 });
 
 // Testing 'display' over 'state' so that we're further away from implementation details.
