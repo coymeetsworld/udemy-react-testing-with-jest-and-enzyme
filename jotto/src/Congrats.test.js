@@ -1,12 +1,10 @@
 import React from 'react'; // because we're using JSX
-import Enzyme, { shallow } from 'enzyme'; // how we're going to be rendering our components and making virtual DOMs out of them.
-import EnzymeAdapter from 'enzyme-adapter-react-16';
-import checkPropTypes from 'check-prop-types'; // we will get error returned to us instead of it being thrown as a warning.
+import { shallow } from 'enzyme'; // how we're going to be rendering our components and making virtual DOMs out of them.
 
 import { findByTestAttr, checkProps } from '../test/testUtils';
 import Congrats from './Congrats';
 
-Enzyme.configure({ adapter: new EnzymeAdapter() })
+// Configure Jest to run a setup file that will do the Enzyme automatically.
 
 const defaultProps = { success: false };
 
