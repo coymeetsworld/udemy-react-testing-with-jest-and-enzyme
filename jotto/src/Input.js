@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// Needs to be a Component as it will connect to redux.
+import { guessWord } from './actions';
+
+// Needs to be a Component as it will conect to redux.
 class Input extends Component {
 	render() {
 		return <div/>
@@ -36,8 +38,11 @@ class Input extends Component {
 //const mapStateToProps = (state) => {
 //destructuring success from the state and returning it.
 const mapStateToProps = ({ success }) => {
-	return { success };
+	return { success }; // first test pass because we wrote this.
 }
 
-export default connect(mapStateToProps)(Input);
+// Passing an object as a 2nd argument to connect.
+// Some people are used to using mapDispatchToProps, but we don't need to really control dispatch here.
+// We just want to make sure guessWord is passed as a prop to this component.
+export default connect(mapStateToProps, { guessWord })(Input);
 
