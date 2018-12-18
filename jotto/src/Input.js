@@ -6,9 +6,6 @@ import { guessWord } from './actions';
 // Needs to be a Component as it will conect to redux.
 class Input extends Component {
 	render() {
-		return <div/>
-	}
-	render() {
 		const contents = this.props.success 
 			? null
 			: (
