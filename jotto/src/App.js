@@ -7,7 +7,19 @@ import Congrats from './Congrats';
 import Input from './Input';
 import { getSecretWord } from './actions';
 
-class App extends Component {
+// Want to export the unconnected component so we can mock getSecretWord as a prop to the unconnected component.
+export class UnconnectedApp extends Component {
+
+  /**
+   * @method componentDidMount
+   * @returns {undefined}
+   */
+  componentDidMount() {
+    // get the secret word
+    this.props.getSecretWord(); // action creator in production that will go out to the server and get the secret word and update the piece of state. 
+    // for tests, it will be the getSecretWord mock.
+  }
+
   render() {
 
     // Eventually state will come from Redux, but we're hard coding it now.
@@ -28,4 +40,4 @@ const mapStateToProps = (state) => {
   return { success, guessedWords, secretWord };
 }
 
-export default connect(mapStateToProps, { getSecretWord } )(App);
+export default connect(mapStateToProps, { getSecretWord } )(UnconnectedApp);

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { storeFactory } from '../test/testUtils';
-import App from './App';
+import App, { UnconnectedApp } from './App';
 
 /**
  * @function setup
@@ -39,4 +39,31 @@ describe('redux properties', () => {
     const getSecretWordProp = wrapper.instance().props.getSecretWord;
     expect(getSecretWordProp).toBeInstanceOf(Function);
   });
+});
+
+test('`getSecretWord` runs on App mount', () => {
+  const getSecretWordMock = jest.fn(); // Mock function that Jest will watch when its called, and how.
+
+  const props = {
+    getSecretWord: getSecretWordMock,
+    success: false,
+    guessedWords: []
+  }
+
+  // set up app component with getSecretWordMock as the getSecretWord prop
+  // the real app gets getSecretWord from Redux, but our unconnected component will get it as an explicitly passed prop.
+
+  // setup function uses our connected app, so we're not using that.
+  const wrapper = shallow(<UnconnectedApp {...props} />);
+
+  // run lifecycle method.
+  // wrapper.instance gives us the actual React component
+  wrapper.instance().componentDidMount(); // will run the lifecycle method
+
+  // check to see if mock ran
+  const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
+
+  expect(getSecretWordCallCount).toBe(1);
+
+  
 });
