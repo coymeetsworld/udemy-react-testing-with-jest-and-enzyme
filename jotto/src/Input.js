@@ -5,6 +5,40 @@ import { guessWord } from './actions';
 
 // Needs to be a Component as it will conect to redux.
 export class UnconnectedInput extends Component {
+
+  /**
+   * Create ref for input box
+   * @method constructor
+   * @param {object} props - Component props.
+   * @returns {undefined}
+   */
+  constructor(props) {
+    super(props);
+
+    // Enzyme is not good at manipulating the dom
+    // React refs allow us simulating entering text, pull the text out
+    this.inputBox = React.createRef();
+    this.submitGuessedWord = this.submitGuessedWord.bind(this);
+  }
+
+  submitGuessedWord(evt) {
+    // to prevent submitting the form
+    evt.preventDefault();
+
+    const guessedWord = this.inputBox.current.value;
+
+    //if (guessedWord) {
+    if (guessedWord && guessedWord.length > 0) {
+      this.props.guessWord(guessedWord);
+    }
+
+  }
+
+  /**
+   * Render the component
+   * @method render
+   * @returns {JSX.Element} - Rendered component
+   */
 	render() {
 		const contents = this.props.success 
 			? null
@@ -12,6 +46,7 @@ export class UnconnectedInput extends Component {
 				<form className="form-inline">
 					<input
 						data-test="input-box"
+            ref={this.inputBox}
 						className="mb-2 mx-sm-3"
 						id="word-guess"
 						type="text"
@@ -19,7 +54,7 @@ export class UnconnectedInput extends Component {
 					<button
 						data-test="submit-button"
 						className="btn btn-primary mb-2"
-            onClick={() => this.props.guessWord('train')}
+            onClick={this.submitGuessedWord}
 						type="submit">
 						Submit
 					</button>
