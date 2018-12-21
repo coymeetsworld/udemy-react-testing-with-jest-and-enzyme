@@ -32,6 +32,7 @@ export class UnconnectedInput extends Component {
       this.props.guessWord(guessedWord);
     }
 
+    this.inputBox.current.value = '';
   }
 
   /**
